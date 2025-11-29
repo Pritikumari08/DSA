@@ -1,0 +1,31 @@
+class Solution {
+    public int[] findEvenNumbers(int[] digits) {
+        int[] count = new int [10];
+        for (int d : digits) count[d]++;
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int num = 100; num<=999; num++){
+            if (num % 2 !=0) continue;
+
+            int a = num/100;
+            int b = (num/10)%10;
+            int c = num%10;
+
+            int[] needed = new int[10];
+            needed[a]++; needed[b]++; needed[c]++;
+
+            boolean ok = true;
+            for (int i=0;i<10; i++){
+                if(needed[i] > count[i]){
+                    ok = false;
+                    break;
+                }
+            }  
+            if (ok) list.add(num);          
+        }
+        int[] ans = new int[list.size()];
+        for(int i =0;i <ans.length; i++) ans[i] = list.get(i);
+        return ans;
+    }
+}
